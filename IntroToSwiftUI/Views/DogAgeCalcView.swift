@@ -9,10 +9,17 @@ import SwiftUI
 
 struct DogAgeCalcView: View {
     
-    @State var txtDogAge: String = ""
-    @State var convertedAge: Int = 0
+    @State var dogAge: String = ""
+    @State var convertedAge: String = "0"
+    @State var humanAgeToInt: String = ""
     
-    func CalculateAge() {}
+    func CalculateAge() {
+        if let humanAge = Int(humanAgeToInt) {
+                    self.convertedAge = "\(humanAge * 7)"
+                } else {
+                    self.convertedAge = "Por favor, insira um número válido."
+                }
+    }
     
     var body: some View {
         VStack {
@@ -23,7 +30,7 @@ struct DogAgeCalcView: View {
                     .padding(.top, 12)
             }
             Form {
-                TextField("Insira a idade do cão:", text: $txtDogAge)
+                TextField("Insira a idade Humana:", text: $humanAgeToInt)
                 Button(action: CalculateAge, label: {
                      Text("Calcular")
                 })
